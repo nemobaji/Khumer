@@ -7,3 +7,5 @@ khu-mer/dist
 khu-mer/node_modules
 khu-mer/build
 khu-mer/src/configs
+
+.DS_Store
