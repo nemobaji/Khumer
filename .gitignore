@@ -1,6 +1,7 @@
 # crawler
 crawler/config
 crawler/node_modules
+crawler/db.js
 
 # khu-mer
 khu-mer/dist
