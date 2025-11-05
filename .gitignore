@@ -1,0 +1,9 @@
+# crawler
+crawler/config
+crawler/node_modules
+
+# khu-mer
+khu-mer/dist
+khu-mer/node_modules
+khu-mer/build
+khu-mer/src/configs
