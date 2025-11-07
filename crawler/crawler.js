@@ -14,10 +14,10 @@ const getSeats = async () => {
     // 좌석 정보에서 name, seatTime 추출하여 배열로 반환
     return seatData.map((seat) => ({
       name: seat.name,
-      seatTime: seat.seatTime?.expireTime ?? null,
+      isOccupied: !!seat.seatTime,
     }));
   } catch (error) {
-    console.error('> error occurred: ', error);
+    console.error(':: error occurred: ', error);
     return [];
   }
 };

@@ -7,17 +7,17 @@ const crawlAndSave = async () => {
     const curData = await getSeats();
 
     if (!prevData) {
-        console.log('> save the initially crawled data');
+        console.log(':: save the initially crawled data');
         await Promise.all(
             curData.map(async (seat) => {
                 await pool.query(
                     `
-                    INSERT INTO seat (name, "seatTime")
+                    INSERT INTO seat (name, "isOccupied")
                     VALUES ($1, $2)
                     ON CONFLICT (name)
-                    DO UPDATE SET "seatTime" = EXCLUDED."seatTime";
+                    DO UPDATE SET "isOccupied" = EXCLUDED."isOccupied";
                     `,
-                    [seat.name, seat.seatTime]
+                    [seat.name, seat.isOccupied]
                 );
             })
         );
@@ -26,15 +26,15 @@ const crawlAndSave = async () => {
     }
 
     for (let i = 0; i < curData.length; i++) {
-        const prev = prevData[i].seatTime;
-        const cur = curData[i].seatTime;
+        const prev = prevData[i].isOccupied;
+        const cur = curData[i].isOccupied;
 
         if (prev !== cur) {
-            console.log(`> update DB: seat ${curData[i].name} status changed`);
+            console.log(`:: update DB seat ${curData[i].name} status changed`);
             await pool.query(
                 `
                 UPDATE seat
-                SET "seatTime" = $1
+                SET "isOccupied" = $1
                 WHERE name = $2;
                 `,
                 [cur, curData[i].name]

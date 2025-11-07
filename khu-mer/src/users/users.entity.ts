@@ -1,8 +1,9 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Reservation } from "src/reservation.entity";
+import { BaseEntity, Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Seat } from "src/seats/seats.entity";
+
 
 @Entity()
-export class User {
+export class User extends BaseEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -12,6 +13,7 @@ export class User {
     @Column({unique: true})
     email: string;
 
-    @OneToMany(() => Reservation, (reservation) => reservation.user)
-    reservations: Reservation[];
+    @ManyToMany(() => Seat, (seat) => seat.users)
+    @JoinTable()
+    seats: Seat[];
 }

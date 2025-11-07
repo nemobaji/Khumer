@@ -1,15 +1,15 @@
-import { BaseEntity, Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
-import { Reservation } from "src/reservation.entity";
+import { BaseEntity, Column, Entity, ManyToMany, PrimaryColumn } from "typeorm";
+import { User } from "src/users/users.entity";
 
 @Entity()
 export class Seat extends BaseEntity {
     @PrimaryColumn()
     name: number;
 
-    @Column({type: 'bigint', nullable: true})
-    seatTime: number| null;
+    @Column()
+    isOccupied: boolean;
 
-    @OneToMany(() => Reservation, (reservation) => reservation.seat)
-    reservations: Reservation[];
+    @ManyToMany(() => User, (user) => user.seats)
+    users: User[];
 }
 
