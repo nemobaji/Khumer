@@ -5,10 +5,10 @@ import { SeatsService } from './seats.service';
 export class SeatsController {
     constructor(private seatsService: SeatsService) {}
 
-    /*
+    /***************************
      * 좌석 예약
-     * POST /seats/1/users/1
-     */
+     * [POST] body: {seatId, userId} 
+     ***************************/
     @Post()
     async reserveSeat(
         @Body('seatId') seatId: number,
@@ -17,10 +17,10 @@ export class SeatsController {
         return this.seatsService.reserveSeat(userId, seatId);
     }
 
-    /*
+    /***************************
      * 예약 취소
-     * DELETE /seats/1/users/1
-     */
+     * DELETE body: {seatId, userId} 
+     ***************************/
     @Delete()
     async cancelSeat(
         @Body('seatId') seatId: number,
