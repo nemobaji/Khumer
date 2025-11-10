@@ -7,7 +7,6 @@ const crawlAndSave = async () => {
     const curData = await getSeats();
 
     if (!prevData) {
-        console.log(':: save the initially crawled data');
         await Promise.all(
             curData.map(async (seat) => {
                 await pool.query(
@@ -21,6 +20,7 @@ const crawlAndSave = async () => {
                 );
             })
         );
+        console.log(':: save the initially crawled data');
         prevData = curData;
         return;
     }
