@@ -1,20 +1,21 @@
 import axios from "axios";
 import https from "https";
-import { BASE_URL } from "./config/api.js";
 
 const agent = new https.Agent({
     rejectUnauthorized: false,
 });
 
-const getSeats = async () => {
+const getSeats = async (url, location) => {
   try {
-    const response = await axios.get(BASE_URL, {httpsAgent: agent});
+    const URL = `${url}${location}`;
+    const response = await axios.get(URL, {httpsAgent: agent});
     const seatData = response.data.data;
 
-    // 좌석 정보에서 name, seatTime 추출하여 배열로 반환
     return seatData.map((seat) => ({
       name: seat.name,
       isOccupied: !!seat.seatTime,
+      expiredTime: seat.seatTime?.expireTime ?? null,
+      location: location
     }));
   } catch (error) {
     console.error(':: error occurred: ', error);
