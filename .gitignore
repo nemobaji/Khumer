@@ -8,5 +8,6 @@ khu-mer/dist
 khu-mer/node_modules
 khu-mer/build
 khu-mer/src/configs
+khu-mer/src/notification/notification.module.ts
 
 .DS_Store
