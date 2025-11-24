@@ -13,7 +13,7 @@ export class UsersController {
     @Post('create')
     async createUser(
         @Body('name') name: string,
-        @Body('email') email: string
+        @Body('email') email: string,
     ) {
         return this.usersService.createUser(name, email);
     }
